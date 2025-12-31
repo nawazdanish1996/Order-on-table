@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Sri Sai Darshini | Digital Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1b5e20;
+            --accent: #ffa000;
+            --light-bg: #f4f7f6;
+            --text-dark: #2d3436;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Poppins', sans-serif; background: var(--light-bg); color: var(--text-dark); padding-bottom: 220px; }
+
+        header {
+            background: #fff; padding: 15px 5%; display: flex; justify-content: space-between;
+            align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;
+        }
+
+        .logo { font-weight: 700; color: var(--primary); font-size: 1rem; }
+        .veg-icon { width: 12px; height: 12px; border: 1px solid green; display: inline-flex; justify-content: center; align-items: center; margin-right: 5px; }
+        .veg-icon::after { content: ''; width: 6px; height: 6px; background: green; border-radius: 50%; }
+
+        .container { padding: 20px 5%; }
+        
+        .search-container { margin-bottom: 20px; }
+        #menuSearch {
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px;
+            font-family: inherit; font-size: 0.9rem; outline: none;
+        }
+
+        .category-title { margin: 20px 0 15px; color: var(--primary); border-left: 4px solid var(--accent); padding-left: 10px; font-size: 1.1rem; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; }
+        
+        .product-card {
+            background: white; border-radius: 15px; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; padding-bottom: 15px; border: 1px solid #eee;
+        }
+        
+        .product-card.hidden { display: none; }
+        .product-card img { width: 100%; height: 110px; object-fit: cover; }
+        .product-card h4 { font-size: 0.85rem; margin: 10px 0 2px; padding: 0 5px; font-weight: 600; }
+        .price-tag { color: var(--primary); font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; display: block; }
+        
+        .add-btn {
+            background: #fff; color: var(--primary); border: 1.5px solid var(--primary);
+            padding: 6px 18px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.7rem;
+        }
+
+        .cart-panel {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: white; box-shadow: 0 -5px 30px rgba(0,0,0,0.15);
+            padding: 20px 5%; display: none; z-index: 2000; border-radius: 25px 25px 0 0;
+        }
+
+        .cart-items-list { max-height: 100px; overflow-y: auto; margin-bottom: 10px; }
+        .cart-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f1f1f1; font-size: 0.85rem; }
+        
+        .total-display { text-align: right; font-weight: 700; font-size: 1rem; margin-bottom: 10px; color: var(--primary); }
+        .qty-btn { width: 28px; height: 28px; border-radius: 8px; border: 1px solid #ddd; background: #f9f9f9; cursor: pointer; }
+
+        .input-group { margin-bottom: 10px; display: flex; gap: 10px; }
+        .order-input { flex: 2; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-family: inherit; font-size: 0.85rem; }
+        .order-select { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-family: inherit; background: #fdfdfd; font-size: 0.85rem; }
+        .special-note { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 10px; font-family: inherit; font-size: 0.8rem; }
+
+        .whatsapp-btn {
+            background: #25D366; color: white; padding: 15px;
+            border-radius: 12px; text-decoration: none; font-weight: 700;
+            display: flex; justify-content: center; align-items: center; gap: 10px; border: none; width: 100%; cursor: pointer; font-size: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo"><span class="veg-icon"></span>SRI SAI DARSHINI</div>
+    <div id="cart-count" style="font-weight:bold; color:var(--primary); font-size: 0.85rem;">🛒 0 Items</div>
+</header>
+
+<div class="container">
+    <div class="search-container">
+        <input type="text" id="menuSearch" placeholder="Search dishes..." onkeyup="filterMenu()">
+    </div>
+
+    <h3 class="category-title">Breakfast Classics</h3>
+    <div class="grid">
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1668236543090-5603ba196329?w=300" alt="Dosa">
+            <h4>Masala Dosa</h4>
+            <span class="price-tag">₹60</span>
+            <button class="add-btn" onclick="addToCart('Masala Dosa', 60)">ADD +</button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=300" alt="Idli">
+            <h4>Idli Sambar</h4>
+            <span class="price-tag">₹40</span>
+            <button class="add-btn" onclick="addToCart('Idli Sambar', 40)">ADD +</button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1645177623570-52838999e5ca?w=300" alt="Vada">
+            <h4>Uddin Vada</h4>
+            <span class="price-tag">₹15</span>
+            <button class="add-btn" onclick="addToCart('Uddin Vada', 15)">ADD +</button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1630406144797-821be1f35d65?w=300" alt="Poori">
+            <h4>Poori Sagu</h4>
+            <span class="price-tag">₹50</span>
+            <button class="add-btn" onclick="addToCart('Poori Sagu', 50)">ADD +</button>
+        </div>
+    </div>
+
+    <h3 class="category-title">Indo-Chinese</h3>
+    <div class="grid">
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=300" alt="Gobi">
+            <h4>Gobi Manchurian</h4>
+            <span class="price-tag">₹90</span>
+            <button class="add-btn" onclick="addToCart('Gobi Manchurian', 90)">ADD +</button>
+        </div>
+    </div>
+
+    <h3 class="category-title">Beverages</h3>
+    <div class="grid">
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1544787210-22bb1c79c1e3?w=300" alt="Coffee">
+            <h4>Filter Coffee</h4>
+            <span class="price-tag">₹20</span>
+            <button class="add-btn" onclick="addToCart('Filter Coffee', 20)">ADD +</button>
+        </div>
+    </div>
+</div>
+
+<div class="cart-panel" id="cart-panel">
+    <div class="cart-items-list" id="cart-items-list"></div>
+    <div class="total-display">Total Bill: ₹<span id="grand-total">0</span></div>
+    
+    <div class="input-group">
+        <input type="text" id="cust-name" class="order-input" placeholder="Your Name">
+        <select id="table-num" class="order-select">
+            <option value="" disabled selected>Table</option>
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+            <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+            <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+    </div>
+    <input type="text" id="special-note" class="special-note" placeholder="Any special instructions? (e.g. No Spicy)">
+    <button class="whatsapp-btn" onclick="sendToWhatsApp()">CONFIRM ORDER</button>
+</div>
+
+<script>
+    let cart = {};
+
+    function addToCart(name, price) {
+        if (!cart[name]) {
+            cart[name] = { qty: 1, price: price };
+        } else {
+            cart[name].qty += 1;
+        }
+        updateUI();
+    }
+
+    function changeQty(name, delta) {
+        cart[name].qty += delta;
+        if (cart[name].qty <= 0) delete cart[name];
+        updateUI();
+    }
+
+    function updateUI() {
+        const list = document.getElementById('cart-items-list');
+        const panel = document.getElementById('cart-panel');
+        const countDisplay = document.getElementById('cart-count');
+        const totalDisplay = document.getElementById('grand-total');
+        
+        list.innerHTML = '';
+        let totalCount = 0;
+        let grandTotal = 0;
+
+        Object.keys(cart).forEach(name => {
+            totalCount += cart[name].qty;
+            grandTotal += (cart[name].qty * cart[name].price);
+            list.innerHTML += `
+                <div class="cart-row">
+                    <span>${name}</span>
+                    <div>
+                        <button class="qty-btn" onclick="changeQty('${name}', -1)">-</button>
+                        <span style="margin: 0 10px; font-weight:700;">${cart[name].qty}</span>
+                        <button class="qty-btn" onclick="changeQty('${name}', 1)">+</button>
+                    </div>
+                </div>`;
+        });
+
+        countDisplay.innerText = `🛒 ${totalCount} Items`;
+        totalDisplay.innerText = grandTotal;
+        panel.style.display = totalCount > 0 ? 'block' : 'none';
+    }
+
+    function filterMenu() {
+        const input = document.getElementById('menuSearch').value.toLowerCase();
+        const cards = document.getElementsByClassName('product-card');
+        for (let i = 0; i < cards.length; i++) {
+            const title = cards[i].getElementsByTagName('h4')[0].innerText.toLowerCase();
+            cards[i].classList.toggle('hidden', !title.includes(input));
+        }
+    }
+
+    function sendToWhatsApp() {
+        const name = document.getElementById('cust-name').value;
+        const table = document.getElementById('table-num').value;
+        const note = document.getElementById('special-note').value;
+        const total = document.getElementById('grand-total').innerText;
+        
+        if (!name || !table) { alert("Please enter Name and Table"); return; }
+
+        const phoneNumber = "918391809802"; 
+        let message = `*HOTEL SRI SAI DARSHINI*%0A*NEW ORDER*%0A`;
+        message += `---------------------------%0A📍 *Table:* ${table}%0A👤 *Name:* ${name}%0A`;
+        if(note) { message += `📝 *Note:* ${note}%0A`; }
+        message += `---------------------------%0A*ITEMS:*%0A`;
+        
+        Object.keys(cart).forEach(item => { 
+            message += `✅ ${item} x ${cart[item].qty} = ₹${cart[item].qty * cart[item].price}%0A`; 
+        });
+        
+        message += `---------------------------%0A💰 *TOTAL BILL: ₹${total}*%0A---------------------------%0A*PLEASE PREPARE THE ORDER*`;
+
+        window.location.href = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
+    }
+</script>
+</body>
+</html>
