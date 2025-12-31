@@ -13,7 +13,6 @@
             --white: #ffffff;
         }
 
-        /* Prevent unwanted mobile behaviors */
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         
         body { 
@@ -35,7 +34,7 @@
             z-index: 1000;
         }
 
-        .logo { font-weight: 700; color: var(--primary); font-size: 1rem; display: flex; align-items: center; }
+        .logo { font-weight: 700; color: var(--primary); font-size: 0.95rem; display: flex; align-items: center; }
         .veg-icon { width: 14px; height: 14px; border: 1px solid green; display: inline-flex; justify-content: center; align-items: center; margin-right: 6px; }
         .veg-icon::after { content: ''; width: 6px; height: 6px; background: green; border-radius: 50%; }
 
@@ -44,12 +43,10 @@
             padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
         }
 
-        /* This area scrolls while keeping the checkout panel fixed */
         .menu-content {
             flex: 1;
             overflow-y: auto;
             padding: 15px;
-            padding-bottom: 30px;
         }
 
         .search-container { margin-bottom: 20px; position: sticky; top: 0; background: var(--light-bg); z-index: 5; padding-bottom: 10px; }
@@ -72,46 +69,42 @@
             background: var(--white); border-radius: 16px; overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center;
             padding-bottom: 12px; border: 1px solid #eee;
-            display: flex; flex-direction: column;
-            justify-content: space-between;
         }
         
-        .product-card img { width: 100%; height: 110px; object-fit: cover; background: #f9f9f9; }
-        .product-card h4 { font-size: 0.85rem; margin: 8px 0 2px; padding: 0 8px; font-weight: 600; min-height: 2.5em; display: flex; align-items: center; justify-content: center; }
-        .price-tag { color: var(--primary); font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; }
+        .product-card img { width: 100%; height: 100px; object-fit: cover; }
+        .product-card h4 { font-size: 0.8rem; margin: 8px 0 2px; padding: 0 8px; font-weight: 600; min-height: 2.4em; display: flex; align-items: center; justify-content: center; }
+        .price-tag { color: var(--primary); font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; display: block; }
         
         .add-btn {
             background: var(--white); color: var(--primary); border: 1.5px solid var(--primary);
-            padding: 8px 0; margin: 0 12px; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 0.75rem;
+            padding: 8px 15px; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 0.75rem;
         }
 
-        /* Order Panel Styles */
         .cart-panel {
             background: var(--white);
             box-shadow: 0 -5px 25px rgba(0,0,0,0.1);
             padding: 15px 20px;
             border-radius: 24px 24px 0 0;
             z-index: 2000;
-            display: none; /* Only shows when items are in cart */
+            display: none;
         }
 
         .cart-items-list { max-height: 100px; overflow-y: auto; margin-bottom: 10px; border-top: 1px solid #eee; }
-        .cart-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px dotted #eee; font-size: 0.85rem; }
+        .cart-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dotted #eee; font-size: 0.8rem; }
         
-        .qty-controls { display: flex; align-items: center; gap: 10px; }
-        .qty-btn { width: 30px; height: 30px; border-radius: 8px; border: 1px solid #ddd; background: #f9f9f9; font-weight: bold; cursor: pointer; }
+        .qty-controls { display: flex; align-items: center; gap: 8px; }
+        .qty-btn { width: 28px; height: 28px; border-radius: 6px; border: 1px solid #ddd; background: #f9f9f9; font-weight: bold; }
 
-        .total-display { display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1rem; margin-bottom: 12px; color: var(--primary); }
+        .total-display { display: flex; justify-content: space-between; font-weight: 700; font-size: 1rem; margin-bottom: 10px; color: var(--primary); }
 
-        .input-group { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-bottom: 8px; }
+        .input-group { display: grid; grid-template-columns: 1.5fr 1fr; gap: 8px; margin-bottom: 8px; }
         .order-input, .order-select, .special-note {
-            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-family: inherit; font-size: 0.85rem; background: #fafafa;
+            width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; font-size: 0.8rem;
         }
 
         .whatsapp-btn {
-            background: #25D366; color: white; padding: 16px;
-            border-radius: 12px; font-weight: 700; width: 100%; border: none; font-size: 1rem;
-            cursor: pointer;
+            background: #25D366; color: white; padding: 14px;
+            border-radius: 12px; font-weight: 700; width: 100%; border: none; font-size: 0.95rem;
         }
     </style>
 </head>
@@ -124,7 +117,7 @@
 
 <div class="menu-content" id="menu-content">
     <div class="search-container">
-        <input type="text" id="menuSearch" placeholder="🔍 Search dishes..." onkeyup="filterMenu()">
+        <input type="text" id="menuSearch" placeholder="🔍 Search (e.g., Dosa, Coffee)..." onkeyup="filterMenu()">
     </div>
 
     <h3 class="category-title">South Indian Breakfast</h3>
@@ -136,7 +129,7 @@
         </div>
         <div class="product-card">
             <img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=300" alt="Idli">
-            <h4>Idli Sambar</h4><span class="price-tag">₹40</span>
+            <h4>Idli Sambar (2pc)</h4><span class="price-tag">₹40</span>
             <button class="add-btn" onclick="addToCart('Idli Sambar', 40)">ADD +</button>
         </div>
         <div class="product-card">
@@ -149,24 +142,97 @@
             <h4>Poori Sagu</h4><span class="price-tag">₹50</span>
             <button class="add-btn" onclick="addToCart('Poori Sagu', 50)">ADD +</button>
         </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?w=300" alt="Set Dosa">
+            <h4>Set Dosa</h4><span class="price-tag">₹55</span>
+            <button class="add-btn" onclick="addToCart('Set Dosa', 55)">ADD +</button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=300" alt="Khara Bath">
+            <h4>Khara Bath</h4><span class="price-tag">₹35</span>
+            <button class="add-btn" onclick="addToCart('Khara Bath', 35)">ADD +</button>
+        </div>
+    </div>
+
+    <h3 class="category-title">Indo-Chinese</h3>
+    <div class="grid">
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=300" alt="Gobi">
+            <h4>Gobi Manchurian</h4><span class="price-tag">₹90</span>
+            <button class="add-btn" onclick="addToCart('Gobi Manchurian', 90)">ADD +</button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1512058560522-cf824204d9c7?w=300" alt="Noodles">
+            <h4>Veg Noodles</h4><span class="price-tag">₹80</span>
+            <button class="add-btn" onclick="addToCart('Veg Noodles', 80)">ADD +</button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=300" alt="Fried Rice">
+            <h4>Veg Fried Rice</h4><span class="price-tag">₹80</span>
+            <button class="add-btn" onclick="addToCart('Veg Fried Rice', 80)">ADD +</button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1567184109411-e2f8e1bd9570?w=300" alt="Paneer">
+            <h4>Paneer 65</h4><span class="price-tag">₹120</span>
+            <button class="add-btn" onclick="addToCart('Paneer 65', 120)">ADD +</button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=300" alt="Spring Roll">
+            <h4>Veg Spring Roll</h4><span class="price-tag">₹70</span>
+            <button class="add-btn" onclick="addToCart('Veg Spring Roll', 70)">ADD +</button>
+        </div>
+    </div>
+
+    <h3 class="category-title">Meals & Rice</h3>
+    <div class="grid">
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=300" alt="Full Meals">
+            <h4>South Indian Meals</h4><span class="price-tag">₹100</span>
+            <button class="add-btn" onclick="addToCart('South Indian Meals', 100)">ADD +</button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1626132647523-66f5bf380027?w=300" alt="Veg Pulav">
+            <h4>Veg Pulav</h4><span class="price-tag">₹70</span>
+            <button class="add-btn" onclick="addToCart('Veg Pulav', 70)">ADD +</button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300" alt="Biryani">
+            <h4>Veg Biryani</h4><span class="price-tag">₹110</span>
+            <button class="add-btn" onclick="addToCart('Veg Biryani', 110)">ADD +</button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1544787210-22bb1c79c1e3?w=300" alt="Curd Rice">
+            <h4>Curd Rice</h4><span class="price-tag">₹50</span>
+            <button class="add-btn" onclick="addToCart('Curd Rice', 50)">ADD +</button>
+        </div>
     </div>
 
     <h3 class="category-title">Beverages</h3>
     <div class="grid">
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1544787210-22bb1c79c1e3?w=300" alt="Coffee">
+            <h4>Filter Coffee</h4><span class="price-tag">₹20</span>
+            <button class="add-btn" onclick="addToCart('Filter Coffee', 20)">ADD +</button>
+        </div>
         <div class="product-card">
             <img src="https://images.unsplash.com/photo-1544787210-22bb1c79c1e3?w=300" alt="Tea">
             <h4>Masala Tea</h4><span class="price-tag">₹15</span>
             <button class="add-btn" onclick="addToCart('Masala Tea', 15)">ADD +</button>
         </div>
         <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1594631252845-29fc458695d1?w=300" alt="Coffee">
-            <h4>Filter Coffee</h4><span class="price-tag">₹20</span>
-            <button class="add-btn" onclick="addToCart('Filter Coffee', 20)">ADD +</button>
-        </div>
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=300" alt="Milkshake">
+            <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=300" alt="Shake">
             <h4>Apple Milkshake</h4><span class="price-tag">₹60</span>
             <button class="add-btn" onclick="addToCart('Apple Milkshake', 60)">ADD +</button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=300" alt="Lassi">
+            <h4>Sweet Lassi</h4><span class="price-tag">₹45</span>
+            <button class="add-btn" onclick="addToCart('Sweet Lassi', 45)">ADD +</button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1556881286-fc6915169721?w=300" alt="Juice">
+            <h4>Fresh Lime Soda</h4><span class="price-tag">₹30</span>
+            <button class="add-btn" onclick="addToCart('Fresh Lime Soda', 30)">ADD +</button>
         </div>
     </div>
 </div>
@@ -227,7 +293,7 @@
         const cards = document.getElementsByClassName('product-card');
         for (let i = 0; i < cards.length; i++) {
             const title = cards[i].getElementsByTagName('h4')[0].innerText.toLowerCase();
-            cards[i].style.display = title.includes(input) ? "flex" : "none";
+            cards[i].style.display = title.includes(input) ? "block" : "none";
         }
     }
 
@@ -245,9 +311,9 @@
         Object.keys(cart).forEach(item => { message += `✅ ${item} x ${cart[item].qty} = ₹${cart[item].qty * cart[item].price}%0A`; });
         message += `---------------------------%0A💰 *TOTAL BILL: ₹${total}*%0A---------------------------%0A*PLEASE PREPARE THE ORDER*`;
 
-        // Using standard https link to avoid ERR_UNKNOWN_URL_SCHEME
-        window.location.href = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
+        window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
     }
 </script>
 </body>
-</html>
+    </html>
+    
