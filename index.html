@@ -5,574 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>Hotel Sri Sai Darshini • Digital Menu</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-    
-    <style>
-        :root {
-            --primary: #1b5e20;
-            --accent: #ffa000;
-            --light-bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text: #1f2937;
-            --shadow: 0 4px 14px rgba(0,0,0,0.07);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            font-family: 'Poppins', system-ui, sans-serif;
-            background: var(--light-bg);
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header {
-            background: white;
-            padding: 14px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 1.12rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .veg-icon {
-            width: 18px;
-            height: 18px;
-            border: 2px solid #16a34a;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .veg-icon::after {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: #16a34a;
-            border-radius: 50%;
-        }
-
-        #cart-count {
-            background: var(--primary);
-            color: white;
-            padding: 5px 13px;
-            border-radius: 30px;
-            font-size: 0.82rem;
-            font-weight: 600;
-        }
-
-        .menu-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 18px 5%;
-            padding-bottom: 180px;
-        }
-
-        .search-container {
-            position: sticky;
-            top: 0;
-            background: var(--light-bg);
-            z-index: 10;
-            padding: 10px 0 18px;
-        }
-
-        #menuSearch {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            outline: none;
-        }
-
-        .category-title {
-            margin: 28px 0 14px;
-            color: var(--primary);
-            font-size: 1.28rem;
-            font-weight: 700;
-            border-left: 5px solid var(--accent);
-            padding-left: 12px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
-            gap: 16px;
-            align-content: start;
-        }
-
-        .product-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            border: 1px solid #f1f5f9;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .image-container {
-            position: relative;
-            width: 100%;
-            padding-top: 75%; /* 4:3 aspect ratio */
-            background: #f1f5f9;
-            overflow: hidden;
-        }
-
-        .image-container img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .product-info {
-            padding: 12px 10px;
-            text-align: center;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .product-info h4 {
-            font-size: 0.92rem;
-            font-weight: 600;
-            line-height: 1.3;
-            margin-bottom: 6px;
-            min-height: 2.6em;
-        }
-
-        .price-tag {
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 1.05rem;
-            margin-bottom: 10px;
-        }
-
-        .add-btn {
-            background: white;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            padding: 9px 24px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.18s ease;
-            margin-top: auto;
-        }
-
-        .add-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .cart-panel {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            box-shadow: 0 -6px 20px rgba(0,0,0,0.14);
-            padding: 16px 5%;
-            border-radius: 24px 24px 0 0;
-            z-index: 999;
-            display: none;
-        }
-
-        .cart-items-list {
-            max-height: 140px;
-            overflow-y: auto;
-            margin-bottom: 12px;
-        }
-
-        .cart-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #f1f5f9;
-            font-size: 0.88rem;
-        }
-
-        .qty-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .qty-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            border: 1px solid #cbd5e1;
-            background: #f8fafc;
-            font-weight: bold;
-            font-size: 1.1rem;
-            cursor: pointer;
-        }
-
-        .total-display {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 14px 0;
-        }
-
-        .input-group {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-
-        .order-input, .order-select, .special-note {
-            padding: 12px;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            background: #f9fafb;
-        }
-
-        .whatsapp-btn {
-            background: #25D366;
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1rem;
-            width: 100%;
-            cursor: pointer;
-        }
-
-        @media (min-width: 768px) {
-            .grid { grid-template-columns: repeat(3, 1fr); }
-            .menu-content { padding: 24px 8%; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-    <div class="logo">
-        <span class="veg-icon"></span>
-        SRI SAI DARSHINI
-    </div>
-    <div id="cart-count">0 Items</div>
+    <div class="logo"><span class="veg-icon"></span> SRI SAI DARSHINI</div>
 </header>
 
-<div class="menu-content" id="menu-content">
+<nav class="category-nav">
+    <a href="#breakfast" class="cat-tab">Breakfast</a>
+    <a href="#chinese" class="cat-tab">Chinese</a>
+    <a href="#meals" class="cat-tab">Meals</a>
+    <a href="#drinks" class="cat-tab">Drinks</a>
+</nav>
 
+<div class="menu-content">
     <div class="search-container">
-        <input type="text" id="menuSearch" placeholder="Search menu (Dosa, Coffee, Biryani...)" onkeyup="filterMenu()"/>
+        <input type="text" id="menuSearch" placeholder="Search dish..." onkeyup="filterMenu()"/>
     </div>
 
-    <h3 class="category-title">South Indian Breakfast</h3>
+    <h3 class="category-title" id="breakfast">South Indian Breakfast</h3>
     <div class="grid">
         <div class="product-card">
-            <div class="image-container"><img src="https://thasneen.com/cooking/wp-content/uploads/2023/02/south-indian-masala-dosa-sambar-chutney-1.jpg" alt="Masala Dosa" loading="lazy"></div>
+            <div class="image-container"><img src="https://thasneen.com/cooking/wp-content/uploads/2023/02/south-indian-masala-dosa-sambar-chutney-1.jpg" alt="Dosa"></div>
             <div class="product-info">
                 <h4>Masala Dosa</h4>
                 <span class="price-tag">₹60</span>
                 <button class="add-btn" onclick="addToCart('Masala Dosa', 60)">ADD +</button>
             </div>
         </div>
-
         <div class="product-card">
-            <div class="image-container"><img src="https://i.ytimg.com/vi/e-ilIsKIPGU/hq720.jpg" alt="Idli" loading="lazy"></div>
+            <div class="image-container"><img src="https://i.ytimg.com/vi/e-ilIsKIPGU/hq720.jpg" alt="Idli"></div>
             <div class="product-info">
-                <h4>Idli Sambar (2pc)</h4>
+                <h4>Idli Sambar</h4>
                 <span class="price-tag">₹40</span>
                 <button class="add-btn" onclick="addToCart('Idli Sambar', 40)">ADD +</button>
             </div>
         </div>
-
-        <div class="product-card">
-            <div class="image-container"><img src="https://i.ytimg.com/vi/SQ96ScSXVlY/maxresdefault.jpg" alt="Vada" loading="lazy"></div>
-            <div class="product-info">
-                <h4>Uddin Vada</h4>
-                <span class="price-tag">₹15</span>
-                <button class="add-btn" onclick="addToCart('Uddin Vada', 15)">ADD +</button>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="image-container"><img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2018/03/poori-masala-recipe.webp" alt="Poori" loading="lazy"></div>
-            <div class="product-info">
-                <h4>Poori Sagu</h4>
-                <span class="price-tag">₹50</span>
-                <button class="add-btn" onclick="addToCart('Poori Sagu', 50)">ADD +</button>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="image-container"><img src="https://www.cookwithkushi.com/wp-content/uploads/2016/03/set_dosa_recipe_soft_thick_sponge_dosa_2.jpg" alt="Set Dosa" loading="lazy"></div>
-            <div class="product-info">
-                <h4>Set Dosa</h4>
-                <span class="price-tag">₹55</span>
-                <button class="add-btn" onclick="addToCart('Set Dosa', 55)">ADD +</button>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="image-container"><img src="https://hebbarskitchen.com/wp-content/uploads/2019/01/chow-chow-bhath-recipe-khara-bhath-kesari-bhath-recipe-2.jpeg" alt="Khara Bath" loading="lazy"></div>
-            <div class="product-info">
-                <h4>Khara Bath</h4>
-                <span class="price-tag">₹35</span>
-                <button class="add-btn" onclick="addToCart('Khara Bath', 35)">ADD +</button>
-            </div>
-        </div>
     </div>
 
-    <h3 class="category-title">Indo-Chinese</h3>
+    <h3 class="category-title" id="chinese">Indo-Chinese</h3>
     <div class="grid">
         <div class="product-card">
-            <div class="image-container"><img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2021/02/gobi-manchurian-dry-recipe.jpg" alt="Gobi Manchurian" loading="lazy"></div>
+            <div class="image-container"><img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2021/02/gobi-manchurian-dry-recipe.jpg" alt="Gobi"></div>
             <div class="product-info">
                 <h4>Gobi Manchurian</h4>
                 <span class="price-tag">₹90</span>
                 <button class="add-btn" onclick="addToCart('Gobi Manchurian', 90)">ADD +</button>
             </div>
         </div>
-
-        <div class="product-card">
-            <div class="image-container"><img src="https://i.ytimg.com/vi/3BPDCF8/maxresdefault.jpg" alt="Veg Noodles" loading="lazy"></div>
-            <div class="product-info">
-                <h4>Veg Noodles</h4>
-                <span class="price-tag">₹80</span>
-                <button class="add-btn" onclick="addToCart('Veg Noodles', 80)">ADD +</button>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="image-container"><img src="https://i.ytimg.com/vi/3BPDCF8/maxresdefault.jpg" alt="Veg Fried Rice" loading="lazy"></div>
-            <div class="product-info">
-                <h4>Veg Fried Rice</h4>
-                <span class="price-tag">₹80</span>
-                <button class="add-btn" onclick="addToCart('Veg Fried Rice', 80)">ADD +</button>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="image-container"><img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2021/03/paneer-65-recipe.jpg" alt="Paneer 65" loading="lazy"></div>
-            <div class="product-info">
-                <h4>Paneer 65</h4>
-                <span class="price-tag">₹120</span>
-                <button class="add-btn" onclick="addToCart('Paneer 65', 120)">ADD +</button>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="image-container"><img src="https://i.ytimg.com/vi/0gK6P8oJ6oY/maxresdefault.jpg" alt="Veg Spring Roll" loading="lazy"></div>
-            <div class="product-info">
-                <h4>Veg Spring Roll</h4>
-                <span class="price-tag">₹70</span>
-                <button class="add-btn" onclick="addToCart('Veg Spring Roll', 70)">ADD +</button>
-            </div>
-        </div>
     </div>
 
-    <h3 class="category-title">Meals & Rice</h3>
+    <h3 class="category-title" id="meals">Meals & Rice</h3>
     <div class="grid">
         <div class="product-card">
-            <div class="image-container"><img src="https://i.ytimg.com/vi/DxuCLiHHNFM/maxresdefault.jpg" alt="South Indian Meals" loading="lazy"></div>
+            <div class="image-container"><img src="https://i.ytimg.com/vi/DxuCLiHHNFM/maxresdefault.jpg" alt="Meals"></div>
             <div class="product-info">
                 <h4>South Indian Meals</h4>
                 <span class="price-tag">₹100</span>
                 <button class="add-btn" onclick="addToCart('South Indian Meals', 100)">ADD +</button>
             </div>
         </div>
-
-        <div class="product-card">
-            <div class="image-container"><img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2021/02/veg-pulao-recipe.jpg" alt="Veg Pulav" loading="lazy"></div>
-            <div class="product-info">
-                <h4>Veg Pulav</h4>
-                <span class="price-tag">₹70</span>
-                <button class="add-btn" onclick="addToCart('Veg Pulav', 70)">ADD +</button>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="image-container"><img src="https://i.ytimg.com/vi/5K3X3X3X3X3/maxresdefault.jpg" alt="Veg Biryani" loading="lazy"></div>
-            <div class="product-info">
-                <h4>Veg Biryani</h4>
-                <span class="price-tag">₹110</span>
-                <button class="add-btn" onclick="addToCart('Veg Biryani', 110)">ADD +</button>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="image-container"><img src="https://i.ytimg.com/vi/curdrice/maxresdefault.jpg" alt="Curd Rice" loading="lazy"></div>
-            <div class="product-info">
-                <h4>Curd Rice</h4>
-                <span class="price-tag">₹50</span>
-                <button class="add-btn" onclick="addToCart('Curd Rice', 50)">ADD +</button>
-            </div>
-        </div>
     </div>
-
-    <h3 class="category-title">Beverages</h3>
-    <div class="grid">
-        <div class="product-card">
-            <div class="image-container"><img src="https://i.ytimg.com/vi/filtercoffee/maxresdefault.jpg" alt="Filter Coffee" loading="lazy"></div>
-            <div class="product-info">
-                <h4>Filter Coffee</h4>
-                <span class="price-tag">₹20</span>
-                <button class="add-btn" onclick="addToCart('Filter Coffee', 20)">ADD +</button>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="image-container"><img src="https://i.ytimg.com/vi/masalatea/maxresdefault.jpg" alt="Masala Tea" loading="lazy"></div>
-            <div class="product-info">
-                <h4>Masala Tea</h4>
-                <span class="price-tag">₹15</span>
-                <button class="add-btn" onclick="addToCart('Masala Tea', 15)">ADD +</button>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="image-container"><img src="https://i.ytimg.com/vi/applemilkshake/maxresdefault.jpg" alt="Apple Milkshake" loading="lazy"></div>
-            <div class="product-info">
-                <h4>Apple Milkshake</h4>
-                <span class="price-tag">₹60</span>
-                <button class="add-btn" onclick="addToCart('Apple Milkshake', 60)">ADD +</button>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="image-container"><img src="https://i.ytimg.com/vi/sweetlassi/maxresdefault.jpg" alt="Sweet Lassi" loading="lazy"></div>
-            <div class="product-info">
-                <h4>Sweet Lassi</h4>
-                <span class="price-tag">₹45</span>
-                <button class="add-btn" onclick="addToCart('Sweet Lassi', 45)">ADD +</button>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="image-container"><img src="https://i.ytimg.com/vi/limesoda/maxresdefault.jpg" alt="Fresh Lime Soda" loading="lazy"></div>
-            <div class="product-info">
-                <h4>Fresh Lime Soda</h4>
-                <span class="price-tag">₹30</span>
-                <button class="add-btn" onclick="addToCart('Fresh Lime Soda', 30)">ADD +</button>
-            </div>
-        </div>
-    </div>
-
 </div>
 
+<div class="view-cart-bar" id="view-cart-bar" onclick="toggleCart(true)">
+    <span id="items-label">0 Items</span>
+    <span>VIEW CART ➔</span>
+</div>
+
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart(false)"></div>
+
 <div class="cart-panel" id="cart-panel">
-    <div class="cart-items-list" id="cart-items-list"></div>
+    <div class="cart-header">
+        <h3>Your Order</h3>
+        <span class="close-cart" onclick="toggleCart(false)">✕</span>
+    </div>
     
-    <div class="total-display">
-        <span>Total Bill :</span>
+    <div id="cart-items-list"></div>
+    
+    <div class="cart-row" style="border-top: 1px solid #eee; padding-top: 15px; font-weight: 700; font-size: 1.1rem;">
+        <span>Grand Total</span>
         <span>₹<span id="grand-total">0</span></span>
     </div>
 
     <div class="input-group">
-        <input type="text" id="cust-name" class="order-input" placeholder="Your Name"/>
-        <select id="table-num" class="order-select">
-            <option value="" disabled selected>Table</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
+        <input type="text" id="cust-name" placeholder="Your Name"/>
+        <select id="table-num">
+            <option value="">Table</option>
+            </select>
     </div>
+    <input type="text" id="special-note" placeholder="Any special instructions?" style="width: 100%; margin-bottom: 15px;"/>
 
-    <input type="text" id="special-note" class="special-note" placeholder="Special instructions (less spicy, no onion, etc.)"/>
-
-    <button class="whatsapp-btn" onclick="sendToWhatsApp()">CONFIRM & SEND ORDER</button>
+    <button class="whatsapp-btn" onclick="sendOrder()">CONFIRM ORDER</button>
 </div>
 
-<script>
-    let cart = {};
-
-    function addToCart(name, price) {
-        if (!cart[name]) {
-            cart[name] = { qty: 1, price: price };
-        } else {
-            cart[name].qty += 1;
-        }
-        updateUI();
-    }
-
-    function changeQty(name, delta) {
-        if (!cart[name]) return;
-        cart[name].qty += delta;
-        if (cart[name].qty <= 0) {
-            delete cart[name];
-        }
-        updateUI();
-    }
-
-    function updateUI() {
-        const list = document.getElementById('cart-items-list');
-        const panel = document.getElementById('cart-panel');
-        const countEl = document.getElementById('cart-count');
-        const totalEl = document.getElementById('grand-total');
-
-        list.innerHTML = '';
-        let count = 0;
-        let total = 0;
-
-        Object.keys(cart).forEach(name => {
-            const item = cart[name];
-            count += item.qty;
-            total += item.qty * item.price;
-
-            list.innerHTML += `
-                <div class="cart-row">
-                    <span>${name}</span>
-                    <div class="qty-controls">
-                        <button class="qty-btn" onclick="changeQty('${name}', -1)">−</button>
-                        <span>${item.qty}</span>
-                        <button class="qty-btn" onclick="changeQty('${name}', 1)">+</button>
-                    </div>
-                </div>`;
-        });
-
-        countEl.textContent = `${count} Items`;
-        totalEl.textContent = total;
-        panel.style.display = count > 0 ? 'block' : 'none';
-    }
-
-    function filterMenu() {
-        const term = document.getElementById('menuSearch').value.toLowerCase();
-        const cards = document.querySelectorAll('.product-card');
-
-        cards.forEach(card => {
-            const title = card.querySelector('h4').textContent.toLowerCase();
-            card.style.display = title.includ
+<script src="script.js"></script>
+</body>
+</html>
