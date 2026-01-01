@@ -1,98 +1,38 @@
-```markdown
-# Hotel Sri Sai Darshini Digital Menu
+Hotel Sri Sai Darshini - Digital Menu
+A mobile-responsive, lightweight digital menu application designed for Hotel Sri Sai Darshini. This web app allows customers to browse the menu, search for specific dishes, manage a virtual cart, and send their final order directly to the kitchen via WhatsApp.
+🚀 Features
+ * Categorized Menu: Organized sections for Breakfast, Indo-Chinese, Meals, and Beverages.
+ * Real-time Search: Instant filtering of menu items as the user types.
+ * Interactive Cart:
+   * Floating "View Cart" bar for easy access.
+   * Add/Remove items and adjust quantities.
+   * Automated total price calculation.
+ * Smart Order Form: Collects customer name, table number, and special cooking instructions.
+ * WhatsApp Integration: Sends a clean, formatted receipt directly to the business phone number.
+ * Persistence: Saves cart items in the browser's local storage so progress isn't lost on page refresh.
+📂 File Structure
+The project is divided into three main files for better maintainability:
+ * index.html: The structure of the website, including the menu grid and order panel.
+ * style.css: All styling, including mobile-first responsive design and animations.
+ * script.js: The logic for filtering the menu, calculating totals, and managing the cart.
+🛠️ Setup Instructions
+ * Download Files: Save index.html, style.css, and script.js into the same folder.
+ * Verify Links: Ensure your index.html has the following tags in the <head> and before the closing </body>:
+   <link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
 
-A clean, mobile-friendly **digital menu** with cart functionality and WhatsApp order placement for **Hotel Sri Sai Darshini**.
+ * Configuration: To change the receiving WhatsApp number, open script.js and update the phone number in the sendOrder function:
+   const phone = "918391809802"; // Ensure it includes the country code
 
-Designed to be displayed via QR code on tables — customers scan, browse, add items to cart, and send the order directly to the restaurant's WhatsApp number.
-
-## Features
-
-- Fully responsive & mobile-first design
-- Search/filter menu items in real-time
-- Consistent card layout with proper image aspect ratio
-- Simple cart system with quantity controls
-- Total calculation
-- Name + Table number + Special instructions
-- One-click order sending via WhatsApp
-- Pure HTML + CSS + JavaScript (no backend required)
-
-## Demo
-
-You can host this file for free on:
-- GitHub Pages
-- Vercel
-- Netlify
-- Render
-- Any static file hosting service
-
-Or simply open `menu.html` directly in a browser for testing.
-
-## How to Use
-
-1. **Download / Copy** the `menu.html` file
-2. **Customize** (optional):
-   - Change restaurant name
-   - Update WhatsApp number in the JavaScript (`const phone = "918391809802";`)
-   - Modify prices, items, categories
-   - Replace images with your own photos
-3. **Host** the file somewhere accessible via URL
-4. **Generate QR code** pointing to your hosted URL
-5. **Print** QR codes and place them on tables
-
-## Project Structure
-
-```
-hotel-sri-sai-darshini-menu/
-└── menu.html          ← The complete digital menu (single file)
-```
-
-(You can also add `README.md`, `images/`, etc. if you want to organize photos locally)
-
-## Customization Tips
-
-```javascript
-// Change WhatsApp number
-const phone = "91XXXXXXXXXX";           // ← your business WhatsApp number
-
-// Add GST / Service Charge (example)
-let total = 0;
-// ... calculation ...
-total = total + (total * 0.05);         // +5% service charge
-```
-
-```html
-<!-- Add new item example -->
-<div class="product-card">
-    <div class="image-container">
-        <img src="https://your-image-url.jpg" alt="Rava Idli" loading="lazy">
-    </div>
-    <div class="product-info">
-        <h4>Rava Idli</h4>
-        <span class="price-tag">₹45</span>
-        <button class="add-btn" onclick="addToCart('Rava Idli', 45)">ADD +</button>
-    </div>
-</div>
-```
-
-## Tech Stack
-
-- HTML5
-- CSS3 (Custom properties + Flex + Grid)
-- JavaScript (Vanilla)
-- Google Fonts (Poppins)
-
-No frameworks, no build tools, no dependencies → extremely lightweight
-
-## License
-
-MIT License  
-Feel free to use, modify, and distribute for your restaurant/business.
-
-## Made with ❤️ for small hotels & darshinis
-
-Enjoy serving your customers faster & smarter!
-
-Hotel Sri Sai Darshini  
-Digital Menu – 2025
-```
-
+📱 How to Use
+ * Open index.html in any modern web browser (works best on mobile).
+ * Browse or search for items.
+ * Click "ADD +" to put items in the cart.
+ * Click the "VIEW CART" bar at the bottom.
+ * Enter your Name and Table Number.
+ * Click "CONFIRM ORDER" to open WhatsApp and send the order.
+🎨 Customization
+ * Adding Products: Duplicate a product-card div in index.html and update the image source, title, and price.
+ * Changing Colors: Update the --primary and --accent variables at the top of style.css to match your brand's colors.
+ * 
+Next Step: Generate a QR Code link that you can print on your restaurant tables to open this menu automatically?
